@@ -1,2 +1,2 @@
 # Genus-Compositicium
-Questa è una prova 2
+This is a graph database of Latin nominal compounds.
