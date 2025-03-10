@@ -37,8 +37,9 @@ The current repository includes:
 The Neo4J graph database can be accessed at the address [http://158.110.146.222:7475/](http://158.110.146.222:7475/). Upon connection, users will find a web server interface, asking for the login data. 
 A read-only user, that has the privileges to perform Cypher `MATCH` operations over the database has been provided, with the following credentials: 
 ```
-username = 
-password = 
+database = compostinominali
+username = nominalCompoundsPublic
+password = pub_Comp_Nom_25
 ```
 The database comes already populated with information originating from the Excel files [here](https://github.com/AI4CH-UniUD/Genus-Compositicium/tree/main/Dataset).
 
