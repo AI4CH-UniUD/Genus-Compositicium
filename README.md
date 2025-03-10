@@ -1,20 +1,15 @@
-# Genus-Compositicium
-This is a graph database of Latin nominal compounds.
-
----
-
 <div align="center">  
   
   
-# A Framework for Indoor Positioning including Building Topology
+# Genus-Compositicium
   
 </div>
 
 ## Description 
 
-This is the home page of the relational indoor positioning database project, developed within the Data Science and Automatic Verification Laboratory at the University of Udine, Italy.
+This is the home page of the graph datbase of Latin nominal compounds, developed at the University of Udine, Italy.
 
-The database aims to pose itself as an integrated and generalizable framework to store, manage and leverage fingeprint positioning data collected by multiple sensors within indoor premises.
+The database aims to report the data contained in some Excel files about nominal compounds of works of different Latin authors and to be a tool for investigating which types of compounds are used depending on the authors and the works they have composed, as we will see in a much more effective and efficient way compared to the use of traditional Excel files..
 
 <p align="center">
 <img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/ER_CompostiNominali.png" alt="Overall Entity-Relationship diagram" />
