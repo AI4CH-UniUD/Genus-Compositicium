@@ -21,6 +21,8 @@ The database schema, which is depicted in the figure above, is composed as follo
 *  **Composto nominale**: it stores informaton regarding a Nominal Compound like its Lemma, its Greek form (Originale greco) and its Lexical category (Categoria morfologica)
 * **Membro**: it stores informaton regarding the Members of a Nominal Compound and contains its Lemma and its Lexical category (Categoria morfologica)
 
+In the following picture we have an example of the graph database.
+
 <p align="center">
 <img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/DB_Grafo_Composti_Nominali.png" alt="Subgraph of the Nominal Compounds graph" />
 </p>
