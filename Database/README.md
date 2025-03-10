@@ -8,7 +8,7 @@ java -jar Composti-Nominali.jar file.composti.nominali=file-composti-nominali/Co
 in which:
 - file-composti-nominali/Compounds.xlsx is the name of the file of the nominal compounds and duplicates with the directory where it is contained, both the file name and the directory without spaces;
 - file-composti-nominali is the imput directory without spaces of the files of Works and this directory should contain only work files and possibly the file with nominal compounds and duplicates;
-- bolt://localhost:7687/ is the address of the local machine that runs and instance of Neo4j Desktop, but you can substitute this address with neo4j://<ip-address>:port/ for the address of a remote machine that runs a Neo4j database server;
+- bolt://localhost:7687/ is the address of the local machine that runs an instance of Neo4j Desktop, but you can substitute this address with neo4j://<ip-address>:port/ for the address of a remote machine that runs a Neo4j database server;
 - utente is the user name to access Neo4j database;
 - password is the password of the user to access Neo4j database;
 - nominalcompounds is the name of the Neo4j database you are accessing.
