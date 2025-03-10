@@ -28,7 +28,7 @@ In the following picture we have an example of the graph database.
 </p>
 
 The current repository includes:
-* the code to set up the database within a Postgres database instance: [link](https://github.com/dslab-uniud/Database-indoor/tree/main/Database/DDL.sql)
+* the code to create the graph database starting from the Excel files for Nominal Compounds and Works: [link]()
 * the code to import a new dataset into the database: [link](https://github.com/dslab-uniud/Database-indoor/tree/main/Database/import_data.ipynb)
 * the code of some queries that show how to use the database: [link](https://github.com/dslab-uniud/Database-indoor/tree/main/Database/exemplary_SQL.sql)
 * some well-known and widely-used datasets that have already been converted into the format expected by the import procedure: [link](https://github.com/dslab-uniud/Database-indoor/tree/main/Datasets)
