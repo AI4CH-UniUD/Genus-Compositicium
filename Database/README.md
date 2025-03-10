@@ -5,7 +5,7 @@ You can also create a jar file named Composti-Nominali.jar running the maven com
 
 ## Running the code to create the Neo4J graph database and to import the Excel data in it
 
-Otherwise, you can use the jar file already include in this repository [here](https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/Database/Composti-Nominali.jar)".
+Otherwise, you can use the jar file already include in this repository [here](https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/Database/Composti-Nominali.jar).
 
 You can run the main class ElaboraFileExcelComposti.java passing zero arguments and using the file config.properties under src/main/resources to pass the six parameters the script needs, or you can pass six parameters on the command line as described in the example below.
 
