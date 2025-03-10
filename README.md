@@ -21,6 +21,10 @@ The database schema, which is depicted in the figure above, is composed as follo
 *  **Composto nominale**: it stores informaton regarding a Nominal Compound like its Lemma, its Greek form (Originale greco) and its Lexical category (Categoria morfologica)
 * **Membro**: it stores informaton regarding the Members of a Nominal Compound and contains its Lemma and its Lexical category (Categoria morfologica)
 
+<p align="center">
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/DB_Grafo_Composti_Nominali.png" alt="Subgraph of the Nominal Compounds graph" />
+</p>
+
 The current repository includes:
 * the code to set up the database within a Postgres database instance: [link](https://github.com/dslab-uniud/Database-indoor/tree/main/Database/DDL.sql)
 * the code to import a new dataset into the database: [link](https://github.com/dslab-uniud/Database-indoor/tree/main/Database/import_data.ipynb)
