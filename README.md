@@ -29,7 +29,7 @@ In the following picture we have an example of the graph database.
 
 The current repository includes:
 * the code to create the graph database starting from the Excel files for Nominal Compounds and Works: [link](https://github.com/AI4CH-UniUD/Genus-Compositicium/tree/main/Database/src/main/java/it/gt/tesi/compostinominali)
-* the code of some queries that show how to use the database: [link]()
+* the code of some queries that show how to use the database: [link](https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/example_queries.rtf)
 
 
 ### Usage of the online implementation of the system
@@ -41,7 +41,7 @@ username =
 password = 
 ```
 The database comes already populated with information originating from the Excel files [here](https://github.com/AI4CH-UniUD/Genus-Compositicium/tree/main/Dataset).
-Examples of queries on the database are reported [here]().
+Examples of queries on the database are reported [here](https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/example_queries.rtf).
 
 ### Entity-Relationship diagram notation
 
