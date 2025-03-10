@@ -40,7 +40,7 @@ A read-only user, that has the privileges to perform `MATCH` operations over the
 username = 
 password = 
 ```
-The database comes already populated with information originating from the Excel files [here]().
+The database comes already populated with information originating from the Excel files [here](https://github.com/AI4CH-UniUD/Genus-Compositicium/tree/main/Dataset).
 Examples of queries on the database are reported [here]().
 
 ### Entity-Relationship diagram notation
