@@ -9,7 +9,7 @@
 
 This is the home page of the graph database of Latin nominal compounds, developed at the University of Udine, Italy.
 
-The database aims to report the data contained in some Excel files ([also present in this repository](https://github.com/AI4CH-UniUD/Genus-Compositicium/tree/main/Dataset)) about nominal compounds of works of different Latin authors and to be a tool for investigating which types of compounds are used depending on the authors and the works they have composed, as we will see in a much more effective and efficient way compared to the use of traditional Excel files.
+The database aims to report the data contained in some Excel files ([also present in this repository](https://github.com/AI4CH-UniUD/Genus-Compositicium/tree/main/Dataset)) about nominal compounds of works of different Latin authors and to be a tool for investigating which types of compounds are used depending on the authors and the works they have composed, in a much more effective and efficient way compared to the use of the original Excel files.
 
 <p align="center">
 <img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/ER_CompostiNominali.png" alt="Overall Entity-Relationship diagram" />
