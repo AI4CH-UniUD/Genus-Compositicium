@@ -9,7 +9,9 @@ Otherwise, you can use the jar file already include in this repository here "LIN
 
 You can run the main class ElaboraFileExcelComposti.java passing zero arguments and using the file config.properties unnder src/main/resources to pass the six parameters the script needs, or you can pass six parameters on the command line as described in the example below.
 
-'''java -jar Composti-Nominali.jar file.composti.nominali=file-composti-nominali/Compounds.xlsx dir.input=file-composti-nominali dbURI=bolt://localhost:7687/ dbUser=utente dbPassword=password dbName=nominalcompounds'''
+```
+java -jar Composti-Nominali.jar file.composti.nominali=file-composti-nominali/Compounds.xlsx dir.input=file-composti-nominali dbURI=bolt://localhost:7687/ dbUser=utente dbPassword=password dbName=nominalcompounds
+```
 
 in which:
 - file-composti-nominali/Compounds.xlsx is the name of the file of the nominal compounds and duplicates with the directory where it is contained, both the file name and the directory without spaces;
