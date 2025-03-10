@@ -3,7 +3,7 @@ These instructions refer to the project 'CompostiNominali', whose code can be us
 The project is Maven-based, and it can be re-created (for instance, for customization purposes) under an IDE like Eclipse using the information reported in the pom.xml file.
 You can also create a jar file named Composti-Nominali.jar running the maven command "clean package", which creates a jar file with all the code needed to run the database import script. 
 
-## Running the code to create the Neo4J graph database and to import the Excel data in it
+## Running the code to create the Neo4j graph database and to import the Excel data in it
 
 Otherwise, you can use the jar file already include in this repository [here](https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/Database/Composti-Nominali.jar).
 
