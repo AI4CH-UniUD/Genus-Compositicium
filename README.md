@@ -9,17 +9,17 @@
 
 This is the home page of the graph datbase of Latin nominal compounds, developed at the University of Udine, Italy.
 
-The database aims to report the data contained in some Excel files about nominal compounds of works of different Latin authors and to be a tool for investigating which types of compounds are used depending on the authors and the works they have composed, as we will see in a much more effective and efficient way compared to the use of traditional Excel files..
+The database aims to report the data contained in some Excel files about nominal compounds of works of different Latin authors and to be a tool for investigating which types of compounds are used depending on the authors and the works they have composed, as we will see in a much more effective and efficient way compared to the use of traditional Excel files.
 
 <p align="center">
 <img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/ER_CompostiNominali.png" alt="Overall Entity-Relationship diagram" />
 </p>
 
-The database schema, which is depicted in the figure above, is divided into four main sub-schemas:
-* **fingerprint sub-schema**: it stores information regarding collected (trajectories of) fingerprints, such as their exact sampling location (e.g., if they belong to the radio-map), the users that collected them, and the employed devices
-* **observation sub-schema**: it stores information regarding a series of data that may have been observed by multiple sensors, including Wi-Fi, Bluetooth, GNSS, Cellular and Inertial Measurement Unit signals, that are all linked to a fingerprint
-* **place sub-schema**: it stores informaton regarding the structure of indoor premises, including all and limited to the data that are useful for positioning purposes (such as containment and adjacency relationships between locations), without any pretense (or actual need) of being capable of representing the actual layout of the premises
-* **data_source sub-schema**: it stores informaton regarding data lineage
+The database schema, which is depicted in the figure above, is composed as follows:
+* **Opera**: it stores information regarding a single Work of an Author and has a Title (Titolo) and an acronym (abbreviazione);
+* **Autore**: it stores information regarding an Author which are his Name (Nome), his century of birth (Secolo nascita) and his century of death (Secolo morte)
+*  **Composto nominale**: it stores informaton regarding a Nominal Compound like its Lemma, its Greek form (Originale greco) and its Lexical category (Categoria morfologica)
+* **Membro**: it stores informaton regarding the Members of a Nominal Compound and contains its Lemma and its Lexical category (Categoria morfologica)
 
 The current repository includes:
 * the code to set up the database within a Postgres database instance: [link](https://github.com/dslab-uniud/Database-indoor/tree/main/Database/DDL.sql)
