@@ -34,7 +34,7 @@ The current repository includes:
 
 ### Usage of the online implementation of the system
 
-The database can be accessed at the address [http://158.110.146.222:7475/](http://158.110.146.222:7475/). Upon connection, users will find a web server interface, asking for the login data. 
+The Neo4J graph database can be accessed at the address [http://158.110.146.222:7475/](http://158.110.146.222:7475/). Upon connection, users will find a web server interface, asking for the login data. 
 A read-only user, that has the privileges to perform Cypher `MATCH` operations over the database has been provided, with the following credentials: 
 ```
 username = 
