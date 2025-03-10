@@ -7,7 +7,7 @@
 
 ## Description 
 
-This is the home page of the graph datbase of Latin nominal compounds, developed at the University of Udine, Italy.
+This is the home page of the graph database of Latin nominal compounds, developed at the University of Udine, Italy.
 
 The database aims to report the data contained in some Excel files about nominal compounds of works of different Latin authors and to be a tool for investigating which types of compounds are used depending on the authors and the works they have composed, as we will see in a much more effective and efficient way compared to the use of traditional Excel files.
 
