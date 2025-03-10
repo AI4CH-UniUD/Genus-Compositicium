@@ -1,5 +1,5 @@
 
-This is the project CommpostiNominali to import Excel files into the Neo4j database. The project is Maven project of which it is reported the pom.xml file. You can create the project under an environment like Eclipse.
+This is the project CommpostiNominali to import Excel files into the Neo4j database. The project is Maven project of which it is reported the pom.xml file. You can create the project under an IDE like Eclipse.
 
 To run the project you can run the main class ElaboraFileExcelComposti.java passing zero arguments and using the file config.properties unnder src/main/resources to pass the six parameters the script needs, or you can pass six parameters on the command line as described in the example below. You can also create a jar file named Composti-Nominali.jar running the maven command "clean package", which creates a jar file with all the code needed to run the script. After which you can run the following command:
 
