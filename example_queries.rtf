@@ -1,0 +1,57 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue254;\red115\green138\blue4;
+\red38\green38\blue38;\red71\green91\blue98;\red165\green119\blue5;\red255\green255\blue255;\red37\green146\blue134;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c99608;\cssrgb\c52157\c60000\c0;
+\cssrgb\c20000\c20000\c20000;\cssrgb\c34510\c43137\c45882;\cssrgb\c70980\c53725\c0;\cssrgb\c100000\c100000\c100000;\cssrgb\c16471\c63137\c59608;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs22 \cf2 Work and Author of a single nominal compound:
+\f1\fs24 \cb3 \
+\pard\pardeftab720\partightenfactor0
+\cf4 match\cf5  \cf6 (\cf2 c\cf6 :\cf5 NominalCompound\cf6 )<-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]-(\cf5 w\cf6 :\cf5 Work\cf6 ),\cf5  \cf6 (\cf5 w\cf6 )-[\cf5 wr\cf6 :\cf5 WRITTEN_BY\cf6 ]->(\cf2 a\cf6 :\cf5 Author\cf6 )\cf5  \cf4 where\cf5  \cf2 c\cf6 .\cf5 lemma \cf6 =\cf5  \cf7 'respublica'\cf5  \cf4 return\cf5  w\cf6 .\cf5 title \cf4 as\cf5  titolo_opera\cf6 ,\cf5  \cf2 a\cf6 .\cf4 name\cf5  \cf4 as\cf5  autore \cf4 order\cf5  \cf4 by\cf5  w\cf6 .\cf5 title\cf2 \cb8 \
+\
+\
+Single nominal compound in the single Author:\cb3 \
+\cf4 match\cf5  \cf6 (\cf2 c\cf6 :\cf5 NominalCompound\cf6 )<-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]-(\cf5 w\cf6 :\cf5 Work\cf6 ),\cf5  \cf6 (\cf5 w\cf6 )-[\cf5 wr\cf6 :\cf5 WRITTEN_BY\cf6 ]->(\cf2 a\cf6 :\cf5 Author\cf6 )\cf5  \cf4 where\cf5  \cf2 c\cf6 .\cf5 lemma \cf6 =\cf5  \cf7 'respublica'\cf4 and\cf5  \cf2 a\cf6 .\cf4 name\cf6 =\cf7 'M. Minucius Felix'\cf5  \cf4 return\cf5  \cf2 c\cf6 .\cf5 lemma \cf4 as\cf5  lemma\cf6 ,\cf5  \cf2 a\cf6 .\cf4 name\cf5  \cf4 as\cf5  autore\cf6 ,\cf5  w\cf6 .\cf5 title \cf4 as\cf5  titolo_opera\cf2 \cb8 \
+\
+\
+All the nominal compounds of a single Author:\
+\cf4 \cb3 match\cf5  \cf6 (\cf2 c\cf6 :\cf5 NominalCompound\cf6 )<-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]-(\cf5 w\cf6 :\cf5 Work\cf6 ),\cf5  \cf6 (\cf5 w\cf6 )-[\cf5 wr\cf6 :\cf5 WRITTEN_BY\cf6 ]->(\cf2 a\cf6 :\cf5 Author\cf6 )\cf5  \cf4 where\cf5  \cf2 a\cf6 .\cf4 name\cf6 =\cf7 'M. Minucius Felix'\cf5  \cf4 return\cf5  w.title as opera, \cf2 c.lemma as composto, a.name as autore order by w.title\cf6 \
+\cf2 \cb8 \
+\
+All nominal compounds of a single Work:\cf5 \cb3 \
+\cf4 match\cf5  \cf6 (\cf2 c\cf6 :\cf5 NominalCompound\cf6 )<-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]-(\cf5 w\cf6 :\cf5 Work\cf6 )\cf5  \cf4 where\cf5  w\cf6 .\cf5 title\cf6 =\cf7 'Octavius'\cf5  \cf4 return\cf5  \cf2 c\cf6 .\cf5 lemma \cf4 as\cf5  composto \cf4 order\cf5  \cf4 by\cf5  tolower\cf6 (\cf2 c\cf6 .\cf5 lemma\cf6 )\cf2 \cb8 \
+\
+\
+Which nominal compounds have the first member in common:\
+\cf4 \cb3 match\cf5  \cf6 (\cf5 c1\cf6 :\cf5 NominalCompound\cf6 )-[\cf5 r1\cf6 :\cf5 FORMED_BY\cf6 ]->(\cf5 m\cf6 :\cf5 Member\cf6 ),(\cf5 c2\cf6 :\cf5 NominalCompound\cf6 )-[\cf5 r2\cf6 :\cf5 FORMED_BY\cf6 ]->(\cf5 m\cf6 )\cf5  \cf4 where\cf5  r1\cf6 .\cf5 position\cf6 =\cf9 1\cf5  \cf4 and\cf5  r2\cf6 .\cf5 position\cf6 =\cf9 1\cf5  \cf4 and\cf5  c1 \cf6 <\cf5  c2 \cf4 return\cf5  c1\cf6 .\cf5 lemma \cf4 as\cf5  composto1\cf6 ,\cf5  c2\cf6 .\cf5 lemma \cf4 as\cf5  composto2\cf6 ,\cf5  m\cf6 .\cf5 lemma \cf4 as\cf5  membro \cf4 order\cf5  \cf4 by\cf5  tolower\cf6 (\cf5 c1\cf6 .\cf5 lemma\cf6 )\cf2 \cb8 \
+\
+\
+Which nominal compounds have the second member in common:\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 match\cf5  \cf6 (\cf5 c1\cf6 :\cf5 NominalCompound\cf6 )-[\cf5 r1\cf6 :\cf5 FORMED_BY\cf6 ]->(\cf5 m\cf6 :\cf5 Member\cf6 ),(\cf5 c2\cf6 :\cf5 NominalCompound\cf6 )-[\cf5 r2\cf6 :\cf5 FORMED_BY\cf6 ]->(\cf5 m\cf6 )\cf5  \cf4 where\cf5  r1\cf6 .\cf5 position\cf6 =\cf9 2\cf5  \cf4 and\cf5  r2\cf6 .\cf5 position\cf6 =\cf9 2\cf5  \cf4 and\cf5  c1 \cf6 <\cf5  c2 \cf4 return\cf5  c1\cf6 .\cf5 lemma \cf4 as\cf5  composto1\cf6 ,\cf5  c2\cf6 .\cf5 lemma \cf4 as\cf5  composto2\cf6 ,\cf5  m\cf6 .\cf5 lemma \cf4 as\cf5  membro \cf4 order\cf5  \cf4 by\cf5  tolower\cf6 (\cf5 c1\cf6 .\cf5 lemma\cf6 )\cf2 \cb8 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+Which type of nominal compound recur in a Work:\
+\cf4 \cb3 match\cf5  \cf6 (\cf5 w\cf6 :\cf5 Work\cf6 )-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]->(\cf5 n\cf6 :\cf5 NominalCompound\cf6 )\cf5  \cf4 where\cf5  w\cf6 .\cf5 title\cf6 =\cf7 'Carminum minorum appendix vel spuria vel suspecta continens'\cf5  \cf4 return\cf5  \cf4 distinct\cf5  n\cf6 .\cf4 type\cf5  \cf4 as\cf5  tipologia \cf4 order\cf5  \cf4 by\cf5  n\cf6 .\cf4 type\cf2 \cb8 \
+\
+\
+Which type of nominal compound recur in an Author:\
+\cf4 \cb3 match\cf5  \cf6 (\cf5 w\cf6 :\cf5 Work\cf6 )-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]->(\cf5 n\cf6 :\cf5 NominalCompound\cf6 ),\cf5  \cf6 (\cf5 w\cf6 )-[\cf5 r2\cf6 :\cf5 WRITTEN_BY\cf6 ]->(\cf2 a\cf6 :\cf5 Author\cf6 )\cf5  \cf4 where\cf5  \cf2 a\cf6 .\cf4 name\cf6 =\cf7 'Claudius Claudianus'\cf5  \cf4 return\cf5  \cf4 distinct\cf5  n\cf6 .\cf4 type as tipologia order by n.type\cf2 \cb8 \
+\
+\
+Which type of nominal compound appear in a literary genre:\
+\cf4 \cb3 match\cf5  \cf6 (\cf5 w\cf6 :\cf5 Work\cf6 )-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]->(\cf5 n\cf6 :\cf5 NominalCompound\cf6 )\cf5  \cf4 where\cf5  w\cf6 .\cf5 genre\cf6 =\cf7 'Poetry'\cf5  \cf4 return\cf5  \cf4 distinct\cf5  n\cf6 .\cf4 type order by n.type\cf2 \cb8 \
+\
+\
+Which tipe of nominal compound appear in literary subgenre:\
+\cf4 \cb3 match\cf5  \cf6 (\cf5 w\cf6 :\cf5 Work\cf6 )-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]->(\cf5 n\cf6 :\cf5 NominalCompound\cf6 )\cf5  \cf4 where\cf5  w\cf6 .\cf5 genre\cf6 =\cf7 \'91Poetry' \cf4 and\cf5  w\cf6 .\cf5 subgenre\cf6 =\cf7 'High poetry'\cf5  \cf4 return\cf5  \cf4 distinct\cf5  n\cf6 .\cf4 type\
+	\cf2 or\cf4 \
+match\cf5  \cf6 (\cf5 w\cf6 :\cf5 Work\cf6 )-[\cf5 r\cf6 :\cf4 CONTAINS\cf6 ]->(\cf5 n\cf6 :\cf5 NominalCompound\cf6 )\cf5  \cf4 where\cf5  w\cf6 .\cf5 subgenre\cf6 =\cf7 'High poetry'\cf5  \cf4 return\cf5  \cf4 distinct\cf5  n\cf6 .\cf4 type\cf2 \cb8 \
+}
