@@ -1,12 +1,15 @@
 
 These instructions refer to the project 'CompostiNominali', whose code can be used to import Excel files into the Neo4j database.
 The project is Maven-based, and it can be re-created (for instance, for customization purposes) under an IDE like Eclipse using the information reported the pom.xml file.
+You can create a jar file named Composti-Nominali.jar running the maven command "clean package", which creates a jar file with all the code needed to run the script. 
 
 ## Running the code to create the Neo4J graph database and to import the Excel data in it
 
-To run the project you can run the main class ElaboraFileExcelComposti.java passing zero arguments and using the file config.properties unnder src/main/resources to pass the six parameters the script needs, or you can pass six parameters on the command line as described in the example below. You can also create a jar file named Composti-Nominali.jar running the maven command "clean package", which creates a jar file with all the code needed to run the script. After which you can run the following command:
+Otherwise, you can use the jar file already include in this repository here "LINK".
 
-java -jar Composti-Nominali.jar file.composti.nominali=file-composti-nominali/Compounds.xlsx dir.input=file-composti-nominali dbURI=bolt://localhost:7687/ dbUser=utente dbPassword=password dbName=nominalcompounds
+You can run the main class ElaboraFileExcelComposti.java passing zero arguments and using the file config.properties unnder src/main/resources to pass the six parameters the script needs, or you can pass six parameters on the command line as described in the example below.
+
+'''java -jar Composti-Nominali.jar file.composti.nominali=file-composti-nominali/Compounds.xlsx dir.input=file-composti-nominali dbURI=bolt://localhost:7687/ dbUser=utente dbPassword=password dbName=nominalcompounds'''
 
 in which:
 - file-composti-nominali/Compounds.xlsx is the name of the file of the nominal compounds and duplicates with the directory where it is contained, both the file name and the directory without spaces;
