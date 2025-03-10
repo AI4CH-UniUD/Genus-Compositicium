@@ -1,5 +1,5 @@
 
-These instructions refer to the project 'CompostiNominali', whose code can be used to import Excel files into the Neo4j database.
+These instructions refer to the project 'CompostiNominali', whose code can be used to import Excel files into a Neo4j database.
 The project is Maven-based, and it can be re-created (for instance, for customization purposes) under an IDE like Eclipse using the information reported the pom.xml file.
 You can create a jar file named Composti-Nominali.jar running the maven command "clean package", which creates a jar file with all the code needed to run the script. 
 
