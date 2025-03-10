@@ -21,4 +21,4 @@ in which:
 - _password_ is the password of the user to access Neo4j database.
 - _nominalcompounds_ is the name of the Neo4j database you are accessing.
 
-
+Once run, the jar scripts merges into the Neo4J database all the information contained in the input Excel files which is not already contained in the database. Please note that the script does not modify data which has been already imported in the database. This means that possbile erroneous database entries should be corrected directly within the database. Another possiblity is correcting the Excel files related to those entries, truncating the entire database, and then running the whole jar script.
