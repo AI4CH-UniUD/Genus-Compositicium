@@ -15,13 +15,13 @@ The database aims to report the data contained in some Excel files ([also presen
 <img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/ER_CompostiNominali.png" alt="Overall Entity-Relationship diagram" />
 </p>
 
-The database schema, which is depicted in the figure above, is composed as follows:
+The conceptual schema upon which the database has been designed, which is depicted in the figure above, contains the entities:
 * **Opera**: it stores information regarding a single Work of an Author and has a Title (Titolo) and an acronym (abbreviazione);
 * **Autore**: it stores information regarding an Author which are his Name (Nome), his century of birth (Secolo nascita) and his century of death (Secolo morte)
 *  **Composto nominale**: it stores informaton regarding a Nominal Compound like its Lemma, its Greek form (Originale greco) and its Lexical category (Categoria morfologica)
 * **Membro**: it stores informaton regarding the Members of a Nominal Compound and contains its Lemma and its Lexical category (Categoria morfologica)
 
-In the following picture we have an example of the graph database.
+The following picture reports an example of an instance of the graph database,
 
 <p align="center">
 <img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/DB_Grafo_Composti_Nominali.png" alt="Subgraph of the Nominal Compounds graph" />
