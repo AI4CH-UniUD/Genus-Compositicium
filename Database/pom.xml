@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>it.gt.tesi</groupId>
+    <artifactId>mavenproject</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.googlecode.soundlibs</groupId>
+            <artifactId>basicplayer</artifactId>
+            <version>3.0.0.0</version>
+        </dependency>
+        
+		<dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-lang3</artifactId>
+		  <version>3.16.0</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.neo4j.driver</groupId>
+		    <artifactId>neo4j-java-driver</artifactId>
+		    <version>5.20.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>poi</artifactId>
+		  <version>5.2.5</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>poi-ooxml</artifactId>
+		  <version>5.2.5</version>
+		</dependency>
+		
+    </dependencies>
+    
+    <build>
+	  <plugins>
+	    <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-shade-plugin</artifactId>
+	      <version>3.6.0</version> <!-- Usa l'ultima versione disponibile -->
+	      <executions>
+	        <execution>
+	          <phase>package</phase>
+	          <goals>
+	            <goal>shade</goal>
+	          </goals>
+	          <configuration>
+	            <!-- Imposta il nome finale del JAR -->
+	            <finalName>Composti-Nominali</finalName>
+	            <filters>
+	              <filter>
+					<artifact>it.gt.tesi:mavenproject</artifact>
+	                <excludes>
+	                  <exclude>*.properties</exclude> 
+	                  <exclude>file-da-elaborare/*.xlsx</exclude> 
+	                </excludes>
+	              </filter>
+	            </filters>
+	            <transformers>
+	              <!-- Aggiungi la classe principale nel manifest -->
+	              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+	                <mainClass>it.gt.tesi.compostinominali.ElaboraFileExcelComposti</mainClass> <!-- Sostituisci con la tua classe principale -->
+	              </transformer>
+	            </transformers>
+	          </configuration>
+	        </execution>
+	      </executions>
+	    </plugin>
+	  </plugins>
+	</build>
+
+</project>
