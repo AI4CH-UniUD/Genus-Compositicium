@@ -4,7 +4,7 @@ The project is Maven-based, and it can be re-created (for instance, for customiz
 You can also create a jar file named Composti-Nominali.jar running the maven command "clean package", which creates a jar file with all the code needed to run the database import script. 
 
 Note. 
-To compile and run the code you need JDK (or JRE only to run) at least of version 17.
+To compile and run the code you need JDK (or JRE only to run) of version at least 17.
 
 ## Running the code to create the Neo4j graph database and to import the Excel data in it
 
