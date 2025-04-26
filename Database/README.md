@@ -17,8 +17,8 @@ java -jar Composti-Nominali.jar file.composti.nominali=file-composti-nominali/Co
 ```
 
 in which:
-- _file-composti-nominali/Compounds.xlsx_ is the name of the file of the nominal compounds with the directory where it is contained; both the file name and the directory should be without spaces. Note: For Windows operating system use backslash character "\\" as path separator instead of slash "/".
-- _file-composti-nominali_ is the input directory (without spaces) of the Excel files and this directory should contain only work files and possibly the file with nominal compounds and their duplicates. Note: For Windows operating system use backslash character "\\" as path separator instead of slash "/".
+- _file-composti-nominali/Compounds.xlsx_ is the name of the file of the nominal compounds with the directory where it is contained; both the file name and the directory should be without spaces. Note: For Windows operating system use two backslash character "\\" as path separator instead of one slash "/".
+- _file-composti-nominali_ is the input directory (without spaces) of the Excel files and this directory should contain only work files and possibly the file with nominal compounds and their duplicates. Note: For Windows operating system use two backslash character "\\" as path separator instead of one slash "/".
 - _bolt://localhost:7687/_ is the address of the local machine that runs an instance of Neo4j Desktop, but you can substitute this address with neo4j://ip-server-address:port/ for the address of a remote machine that runs a Neo4j database server.
 - _utente_ is the user name to access Neo4j database.
 - _password_ is the password of the user to access Neo4j database.
