@@ -4,26 +4,37 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * La classe che contiene le proprietà di un composto nominale, ovvero lemma,
- * tipologia, sottotipologia e occorrenze del composto nominale nell'opera data.
+ * tipologia, sottotipologia, l'originale greco e occorrenze del composto nominale nell'opera data.
  * Contiene getter/setter delle proprietà su elencate.
  */
 public class Composto {
 	
 	private String lemma;
+	private String categoriaMorfologica;
 	private String tipologia;
 	private String sottotipologia;
+	private String originaleGreco;
 	private int occorrenze;
 	
 	/**
-	 * Restituisce true se mancano il lemma, oppure la tipologia oppure la sottotipologia,
-	 * false se ci sono tutte e tre.
+	 * Restituisce true se mancano il lemma, la categoria morfologica, la tipologia e la sottotipologia;
+	 * false se ci sono tutte e quattro.
 	 * 
-	 * @return true se manca il lemma, la tipologia o la sottotipologia, false altrimenti
+	 * @return true se manca il lemma, la catergoria morfologica, la tipologia e la sottotipologia; false altrimenti
 	 */
 	public boolean isEmpty() {
-		return StringUtils.isEmpty(lemma) || StringUtils.isEmpty(tipologia) || StringUtils.isEmpty(sottotipologia);
+		return StringUtils.isEmpty(lemma) && StringUtils.isEmpty(categoriaMorfologica) && 
+				StringUtils.isEmpty(tipologia) && StringUtils.isEmpty(sottotipologia);
 	}
 	
+	public String getOriginaleGreco() {
+		return originaleGreco;
+	}
+
+	public void setOriginaleGreco(String originaleGreco) {
+		this.originaleGreco = originaleGreco;
+	}
+
 	@Override
 	public String toString() {
 		return "Composto [lemma=" + lemma + ", tipologia=" + tipologia + ", sottotipologia=" + sottotipologia
@@ -63,14 +74,22 @@ public class Composto {
 	}
 
 	/**
-	 * Restituisce true se il composto nominale ha tipologica "Grecisms" e 
+	 * Restituisce true se il composto nominale ha tipologica "Grecism" e 
 	 * sottotipologia "Gr", false altrimenti. I controlli sono case insensitive.
 	 *  
 	 * @return true se il Composto è un grecismo, false altrimenti
 	 */
 	public boolean isGrecismo() {
-		return "Grecisms".equalsIgnoreCase(tipologia) 
+		return "Grecism".equalsIgnoreCase(tipologia) 
 				&& "Gr".equalsIgnoreCase(sottotipologia);
+	}
+
+	public String getCategoriaMorfologica() {
+		return categoriaMorfologica;
+	}
+
+	public void setCategoriaMorfologica(String categoriaMorfologica) {
+		this.categoriaMorfologica = categoriaMorfologica;
 	}
 
 }

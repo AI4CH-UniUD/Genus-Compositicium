@@ -50,6 +50,7 @@ public class ElaboratoreCartellaDoppioni {
 	 */
 	public void elabora() {
 		Iterator<Row> rowIterator = sheetDoppioni.iterator();
+		int errors = 0;
 		
 		//i composti iniziano dalla seconda riga
 		rowIterator.next();
@@ -61,24 +62,29 @@ public class ElaboratoreCartellaDoppioni {
 			int emptyColIdx = getEmptyColIndex(row);
 			if (emptyColIdx < 2) {
 				System.out.println("ATTENZIONE riga " + rowNum + " errata");
+				errors++;
 				continue;
 			}
 			for (int i = 0; i < emptyColIdx - 1; i++) {
 				Composto composto = getComposto(row, i);
 				if (!esisteCompostoInDB(composto)) {
 					System.out.println("ATTENZIONE: manca il composto " + composto.getLemma() + " in DB");
+					errors++;
 					continue;
 				}
 				for (int j = i + 1; j < emptyColIdx; j++) {
 					Composto doppione = getComposto(row, j);
 					if (!esisteCompostoInDB(doppione)) {
 						System.out.println("ATTENZIONE: manca il composto " + doppione.getLemma() + " in DB");
+						errors++;
 						continue;
 					}
 					creaRelazioneDoppioneInDB(doppione, composto);
 				}
 			}
 		}
+		System.out.println("Righe elaborate: " + rowNum);
+		System.out.println("Errori trovati: " + errors);
 	}
 
 	/**

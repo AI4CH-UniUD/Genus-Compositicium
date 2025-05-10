@@ -4,25 +4,15 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Classe che contiene le proprietà lemma e categoria morfologica per un
- * composto nominale o un membro. Inoltre contiene l'originale greco dei 
- * grecismi.
+ * membro. 
  * Contiene getter/setter per le proprietà elencate.
  */
-public class CompostoMembro {
+public class Membro {
 	
-	public String getOriginaleGreco() {
-		return originaleGreco;
-	}
-
-	public void setOriginaleGreco(String originaleGreco) {
-		this.originaleGreco = originaleGreco;
-	}
-
 	private String lemma;
 	private String categoriaMorfologica;
-	private String originaleGreco;
 	
-	public CompostoMembro(String lemma, String categoriaMorfologica) {
+	public Membro(String lemma, String categoriaMorfologica) {
 		this.lemma = lemma;
 		this.categoriaMorfologica = categoriaMorfologica;
 	}
@@ -44,7 +34,7 @@ public class CompostoMembro {
 	}
 	
 	/**
-	 * Restituisce true se questo CompostoMembro è vuoto, ovvero se manca il lemma e
+	 * Restituisce true se questo Membro è vuoto, ovvero se manca il lemma e
 	 * manca la catergoria morfologica.
 	 * 
 	 * @return true se il CompostoMembro è vuoto, false altrimenti

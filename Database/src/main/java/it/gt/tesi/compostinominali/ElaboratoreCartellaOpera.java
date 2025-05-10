@@ -1,7 +1,6 @@
 package it.gt.tesi.compostinominali;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,8 +10,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.QueryConfig;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.util.Pair;
 
 /**
  * La classe che permette di creare in DB l'opera di un dato foglio di calcolo.
@@ -62,86 +59,42 @@ public class ElaboratoreCartellaOpera {
 		
 		creaRelazioneOperaAutoreInDB(opera, autore);
 		
-		Row rowTipologia = rowIterator.next();
-		Row rowSottotipologia = rowIterator.next();
-		
 		int compostiTrovati = 0;
-		int grecismiTrovati = 0;
 		int compostiVuoti = 0;
 		int rowNum = 5;
+		int errors = 0;
+		
+		//i composti nominali iniziano due righe sotto l'opera
+		rowIterator.next();
+		rowIterator.next();
+		
 		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			rowNum++;
-			Composto composto = getComposto(row, rowTipologia, rowSottotipologia);
-			if (composto.isEmpty()) {
-				System.out.println("Composto vuoto: " + composto.getLemma() + " alla riga " + rowNum);
-				compostiVuoti++;
-				continue;
-			} else if (composto.isGrecismo()) {
-				grecismiTrovati++;
-			}
-			compostiTrovati++;
-			if (esisteComposto(composto)) {
-				//se il composto ha la stessa tipologia e sottotipologia nel database
-				//oppure non ha ancora le proprietà, lo aggiungo in DB, 
-				//altrimenti il metodo segnala errore
-				if (compostoHaStessaTipologiaInDB(composto)) {
-					//il composto nominale è già presente del database, ma gli si devono
-					//aggiungere le proprietà tipologia e sottotipologia
-					aggiungiProprietaCompostoInDB(composto);
+			try {
+				Composto composto = getComposto(row);
+				if (composto.isEmpty()) {
+					System.out.println("Composto vuoto: " + composto.getLemma() + " alla riga " + rowNum);
+					compostiVuoti++;
+					continue;
+				} 
+				compostiTrovati++;
+				if (esisteComposto(composto)) {
 					creaRelazioneOperaCompostoInDB(opera, composto);
+				} else {
+					System.out.println("IL COMPOSTO " + composto.getLemma() 
+						+ " NON È STATO TROVATO TRA LA LISTA DEI COMPOSTI NOMINALI");
+					errors++;
 				}
-			} else {
-				System.out.println("IL COMPOSTO " + composto.getLemma() 
-					+ " NON È STATO TROVATO TRA LA LISTA DEI COMPOSTI NOMINALI");
+			} catch (Exception e) {
+				System.out.println("Errore alla riga " + rowNum + ": " + e.getMessage());
+				errors++;
 			}
 		}
 		
-		System.out.println("Grecismi trovati: " + grecismiTrovati);
 		System.out.println("Composti trovati: " + compostiTrovati);
 		System.out.println("Composti vuoti: " + compostiVuoti);
-	}
-
-	/**
-	 * Verifica che il composto nominale in DB abbia le stesse tipologia e 
-	 * sottotipologia del composto passato come parametro. Se ha le stesse
-	 * tipologia e sottotipologia oppure se non ha ancora valori per queste
-	 * restituiesce true. Altrimenti segnala l'errore e restituisce false.
-	 * Si suppone che il composto esista già nel database.
-	 * 
-	 * @param composto il composto nominale di cui controllare tipologia e sottotipologia
-	 * @return true se composto ha le stesse tipologia e sottotipologia del
-	 * 		NominalCompound in DB con lo stesso lemma oppure se il NominalCompound
-	 * 		non ha ancora le proprietà impostate; false altrimenti 
-	 */
-	private boolean compostoHaStessaTipologiaInDB(Composto composto) {
-		var result = dbDriver.executableQuery(
-				"MATCH (c:NominalCompound {lemma: $lemma}) RETURN c")
-				.withParameters(Map.of("lemma", composto.getLemma()))
-			    .withConfig(QueryConfig.builder().withDatabase(dbName).build())
-				.execute();
-		List<Pair<String,Value>> values = result.records().get(0).fields();
-		for (Pair<String,Value> nameValue: values) {
-	        Value value = nameValue.value();
-	        //verifica che la tipologia e la sottotipologia sono le stesse del composto
-	        String tipologia = value.get("type").asString();
-	        String sottotipologia = value.get("subtype").asString();
-	        if (tipologia == null || "null".equals(tipologia) || 
-	        		sottotipologia == null || "null".equals(sottotipologia)) {
-	        	return true;
-	        }
-	        if (tipologia.equals(composto.getTipologia()) && 
-	        		sottotipologia.equals(composto.getSottotipologia())) {
-	        	return true;
-	        }
-	        System.out.println("ATTENZIONE: il composto nominale " + composto.getLemma() +
-	        		" ha tipologia " + composto.getTipologia() + " e sottotipologia " + 
-	        		composto.getSottotipologia() + " ma nel database ha tipologia " +
-	        		tipologia + " e sottotipologia " + sottotipologia + 
-	        		". \nNon viene aggiunto al DB: correggere l'errore.");
-	        return false;
-		}
-		return true;
+		System.out.println("Errori trovati: " + errors);
 	}
 
 	/**
@@ -155,33 +108,14 @@ public class ElaboratoreCartellaOpera {
 		dbDriver.executableQuery(
 				"MATCH (op:Work {title: $titolo, genre: $genere, "
 				+ "subgenre: $sottogenere, acronym: $abbreviazione}), "
-				+ "(cn:NominalCompound {lemma: $lemma, type: $tipologia, "
-				+ "subtype: $sottotipologia}) "
+				+ "(cn:NominalCompound {lemma: $lemma}) "
 				+ "MERGE (op)-[r:CONTAINS {occurrences: $occorrenze}]->(cn) RETURN r")
 				.withParameters(Map.of("titolo", opera.getTitolo(), 
 						"genere", opera.getGenere(), 
 						"sottogenere", opera.getSottogenere(),
 						"abbreviazione", opera.getAbbreviazione(),
 						"lemma", composto.getLemma(),
-						"tipologia", composto.getTipologia(),
-						"sottotipologia", composto.getSottotipologia(), 
 						"occorrenze", composto.getOccorrenze()))
-			    .withConfig(QueryConfig.builder().withDatabase(dbName).build())
-				.execute();
-	}
-
-	/**
-	 * Aggiunge le proprietà tipologia e sottotipologia cercando il composto per lemma.
-	 * 
-	 * @param composto il composto con le proprietà da aggiungere
-	 */
-	private void aggiungiProprietaCompostoInDB(Composto composto) {
-		dbDriver.executableQuery(
-				"MATCH (c:NominalCompound {lemma: $lemma}) "
-				+ "SET c.type = $tipologia, c.subtype = $sottotipologia RETURN c")
-				.withParameters(Map.of("lemma", composto.getLemma(), 
-						"tipologia", composto.getTipologia(), 
-						"sottotipologia", composto.getSottotipologia()))
 			    .withConfig(QueryConfig.builder().withDatabase(dbName).build())
 				.execute();
 	}
@@ -204,72 +138,19 @@ public class ElaboratoreCartellaOpera {
 	}
 	
 	/**
-	 * Recupera il Composto che ha il dato lemma, la data tipologia, la data sottotipologia
-	 * e il dato numero di occorrenze.
+	 * Recupera il Composto che ha il dato lemma e il dato numero di occorrenze.
 	 * 
 	 * @param row la riga dove si trova il composto
-	 * @param rowTipologia la riga dove si trovano le varie tipologie
-	 * @param rowSottotipologia la riga dove si trovano le varie sottotipologie
 	 * @return il composto alla riga row
 	 */
-	private Composto getComposto(Row row, Row rowTipologia, Row rowSottotipologia) {
+	private Composto getComposto(Row row) {
 		Composto composto = new Composto();
-		Iterator<Cell> cellIterator = row.cellIterator();
-		
-		Cell cell = cellIterator.next();
-		composto.setLemma(cell.getStringCellValue());
-		
-		while (cellIterator.hasNext()) {
-			cell = cellIterator.next();
-			if (cell.getCellType() == CellType.NUMERIC) {
-				composto.setOccorrenze(Double.valueOf(cell.getNumericCellValue()).intValue());
-				composto.setTipologia(getTipologia(rowTipologia, cell.getColumnIndex()));
-				composto.setSottotipologia(getSottotipologia(rowSottotipologia, cell.getColumnIndex()));
-				break;
-			}
+		composto.setLemma(getStringCellValue(row.getCell(0)));
+		composto.setOccorrenze(getIntCellValue(row.getCell(1)));
+		if (composto.getOccorrenze() <= 0 && !composto.isEmpty()) {
+			throw new IllegalArgumentException("Mancano le occorrenze");
 		}
 		return composto;
-	}
-
-	/**
-	 * Restituisce la sottotipoloiga relativa all'indice columnIndex
-	 * 
-	 * @param rowSottotipologia la riga dove si trovano le varie sottotipologie
-	 * @param columnIndex l'indice della colonna della sottotipologia
-	 * @return la sottotipoloiga relativa all'indice columnIndex
-	 * 
-	 * @throw IllegalStateException se non riesce a trovare la sottotipologia
-	 */
-	private String getSottotipologia(Row rowSottotipologia, int columnIndex) {
-		if (rowSottotipologia.getCell(columnIndex).getCellType() == CellType.STRING) {
-			return rowSottotipologia.getCell(columnIndex).getStringCellValue();
-		}
-		if (rowSottotipologia.getCell(columnIndex).getCellType() == CellType.NUMERIC) {
-			return String.valueOf(Double.valueOf(
-						rowSottotipologia.getCell(columnIndex).getNumericCellValue()).intValue());
-		}
-		throw new IllegalStateException("Il foglio " + sheetOpera.getSheetName() +
-				" ha la riga della sottotipologia errata");
-	}
-
-	/**
-	 * Restituisce la tipologia corrispondente alla colonna columnIndex
-	 * 
-	 * @param rowTipologia la riga delle tipologie
-	 * @param columnIndex l'indice della colonna della tipologia
-	 * @return la tipologia corrispondente alla colonna columnIndex
-	 * 
-	 * @throw IllegalStateException se non riesce a trovare la tipologia
-	 */
-	private String getTipologia(Row rowTipologia, int columnIndex) {
-		for (int pos = columnIndex; pos > 0; pos--) {
-			if (rowTipologia.getCell(pos) != null && 
-					rowTipologia.getCell(pos).getCellType() == CellType.STRING) {
-				return rowTipologia.getCell(pos).getStringCellValue();
-			}
-		}
-		throw new IllegalStateException("Il foglio " + sheetOpera.getSheetName() +
-				" ha la riga della tipologia errata");
 	}
 
 	/**
@@ -322,12 +203,34 @@ public class ElaboratoreCartellaOpera {
 	private Opera getOpera(Iterator<Row> rowIterator) {
 		Opera opera = new Opera();
 		Row row = rowIterator.next();
-		opera.setTitolo(row.getCell(0).getStringCellValue());
-		opera.setAbbreviazione(row.getCell(1).getStringCellValue());
+		opera.setTitolo(getStringCellValue(row.getCell(0)));
+		opera.setAbbreviazione(getStringCellValue(row.getCell(1)));
 		row = rowIterator.next();
-		opera.setGenere(row.getCell(0).getStringCellValue());
-		opera.setSottogenere(row.getCell(1).getStringCellValue());
+		opera.setGenere(getStringCellValue(row.getCell(0)));
+		opera.setSottogenere(getStringCellValue(row.getCell(1)));
+		if (StringUtils.isEmpty(opera.getTitolo())) {
+			throw new IllegalArgumentException("Manca il titolo dell'opera");
+		}
+		if (StringUtils.isEmpty(opera.getAbbreviazione())) {
+			throw new IllegalArgumentException("Manca l'abbreviazione dell'autore");
+		}
+		if (StringUtils.isEmpty(opera.getGenere())) {
+			throw new IllegalArgumentException("Manca il genere dell'opera");
+		}
+		if (StringUtils.isEmpty(opera.getSottogenere())) {
+			throw new IllegalArgumentException("Manca il sottogenere dell'opera");
+		}
 		return opera;
+	}
+	
+	/**
+	 * Restituisce il valore di cell come stringa o null se cell è null.
+	 * 
+	 * @param cell la Cell da cui prendere il valore stringa
+	 * @return il valore di cell come stringa o null se cell è null
+	 */
+	private String getStringCellValue(Cell cell) {
+		return cell != null ? cell.getStringCellValue() : null;
 	}
 
 	/**
@@ -356,10 +259,43 @@ public class ElaboratoreCartellaOpera {
 	private Autore getAutore(Iterator<Row> rowIterator) {
 		Row row = rowIterator.next();
 		Autore autore = new Autore();
-		autore.setNome(row.getCell(0).getStringCellValue());
-		autore.setSecoloNascita(Double.valueOf(row.getCell(1).getNumericCellValue()).intValue());
-		autore.setSecoloMorte(Double.valueOf(row.getCell(2).getNumericCellValue()).intValue());
+		autore.setNome(getStringCellValue(row.getCell(0)));
+		autore.setSecoloNascita(getIntCellValue(row.getCell(1)));
+		autore.setSecoloMorte(getIntCellValue(row.getCell(2)));
+		if (StringUtils.isEmpty(autore.getNome())) {
+			throw new IllegalArgumentException("Manca il nome dell'autore");
+		}
+		if (autore.getSecoloNascita() == 0) {
+			throw new IllegalArgumentException("Secolo nascita autore errato");
+		}
+		if (autore.getSecoloMorte() == 0) {
+			throw new IllegalArgumentException("Secolo morte autore errato");
+		}
 		return autore;
+	}
+	
+	/**
+	 * Restituisce il valore della cella cell come intero. Se cell è null
+	 * o ha CellType.BLANK restituisce 0. Solleva un'eccezione se CellType
+	 * non è NUMERIC, STRING o BLANK.
+	 * 
+	 * @param cell la cella da cui recuperare i valore
+	 * @return il valore della cella come intero
+	 */
+	private int getIntCellValue(Cell cell) {
+		if (cell == null) {
+			return 0;
+		}
+		if (cell.getCellType() == CellType.NUMERIC) {
+			return Double.valueOf(cell.getNumericCellValue()).intValue();
+		}
+		if (cell.getCellType() == CellType.STRING) {
+			return Integer.valueOf(cell.getStringCellValue());
+		}
+		if (cell.getCellType() == CellType.BLANK) {
+			return 0;
+		}
+		throw new IllegalArgumentException("Tipo di cella non riconosciuta " + cell.getCellType());
 	}
 
 }

@@ -2,6 +2,7 @@ package it.gt.tesi.compostinominali;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -41,6 +42,8 @@ public class ElaboraFileExcelComposti {
 		
 		checkDirsAndFiles(prop);
 		
+		long start = System.currentTimeMillis();
+		
 		Driver dbDriver = getDatabaseDriver(prop.getProperty("dbURI"), 
 					prop.getProperty("dbUser"), prop.getProperty("dbPassword"));
 			
@@ -50,7 +53,10 @@ public class ElaboraFileExcelComposti {
 		
 		dbDriver.close();	
 		
+		long end = System.currentTimeMillis();
+		
 		System.out.println("\nFine elaborazione");
+		System.out.println("Tempo di elaborazione: " + Math.round(((double)(end-start)) / 1000));
 	}
 	
 	/**
@@ -62,12 +68,21 @@ public class ElaboraFileExcelComposti {
 	private static void elaboraFileOpere(Driver dbDriver, Properties prop) {
 		File dirInput = new File(prop.getProperty("dir.input"));
 		File fileComposti = new File(prop.getProperty("file.composti.nominali"));
+		int numFileElaborati = 0;
+		
+		File[] files = dirInput.listFiles(new FilenameFilter() {
+		    public boolean accept(File dir, String name) {
+		        return name.toLowerCase().endsWith(".xlsx") || 
+		        		name.toLowerCase().endsWith(".xls");
+		    }
+		});
 	
 		//per ogni file elabora l'opera
-		for (File fileOpera : dirInput.listFiles()) {
+		for (File fileOpera : files) {
 			if (fileOpera.isFile() && !fileOpera.isHidden() && !fileOpera.equals(fileComposti)) {
 				try {
 					System.out.println("\nElaboro il file " + fileOpera.getName());
+					numFileElaborati++;
 					
 					FileInputStream streamOpera = new FileInputStream(fileOpera);
 					XSSFWorkbook workbookOpera = new XSSFWorkbook(streamOpera); 
@@ -83,6 +98,7 @@ public class ElaboraFileExcelComposti {
 				}
 			}
 		}
+		System.out.println("\nNumero file opera elaborati: " + numFileElaborati);
 	}
 
 	/**
