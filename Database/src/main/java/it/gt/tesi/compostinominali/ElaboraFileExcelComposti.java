@@ -15,7 +15,7 @@ import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
 
 /**
- * La classe che esegue l'eleaborazione del foglio di calcolo dei composti nominali e 
+ * La classe che esegue l'eleaborazione dei fogli di calcolo dei composti nominali e 
  * delle opere aggiungendo i dati in DB.
  */
 public class ElaboraFileExcelComposti {
@@ -56,7 +56,7 @@ public class ElaboraFileExcelComposti {
 		long end = System.currentTimeMillis();
 		
 		System.out.println("\nFine elaborazione");
-		System.out.println("Tempo di elaborazione: " + Math.round(((double)(end-start)) / 1000));
+		System.out.println("Tempo di elaborazione in secondi: " + Math.round(((double)(end-start)) / 1000));
 	}
 	
 	/**
