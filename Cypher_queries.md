@@ -1,4 +1,8 @@
+<div align="center">
+
 # Cypher queries for the graph database of Latin compounds
+
+</div>
 
 The file `Index.xlsx` contains all the information that the queries presented in this document can refer to.
 
@@ -541,7 +545,7 @@ ORDER BY
 
 This query is similar to the previous ones, with the only difference that it refers to a specific literary subgenre.
 
-### Literary subgenres II, with percentage
+### Literary subgenre II, with percentage
 
 ```cypher
 // Step 1: calculate the total occurrences and pass it as a variable
