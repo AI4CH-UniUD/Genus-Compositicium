@@ -48,6 +48,24 @@ ORDER BY
 
 The result is the same as the previous one, but with more detailed information about author and title.
 
+### All authors and works III (graphic result)
+
+```cypher
+MATCH
+  (c:NominalCompound)<-[r:CONTAINS]-(w:Work),
+  (w)-[wr:WRITTEN_BY]->(a:Author)
+WHERE
+  c.lemma='aliger' // Insert here the compound
+RETURN
+  c, w, a, r, wr
+```
+
+The result is the same, but Neo4j generates a graph of the nodes representing the compound, the works in which it occurs, and their authors, as shown in the following picture.
+
+<p align="center">
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_1_aliger.png" alt="aliger" />
+</p>
+
 ### Specific author I
 
 ```cypher
@@ -137,7 +155,7 @@ These queries investigate which compounds have a member in common.
 Results are sorted alphabetically.
 The two members of the compound, along with its type and subtype, are included.
 
-### All compounds sharing the first member
+### All compounds sharing the first member I
 
 ```cypher
 MATCH
@@ -159,7 +177,27 @@ ORDER BY
 
 This query identifies all compounds sharing the same first member.
 
-### All compounds sharing the second member
+### All compounds sharing the first member II (graphic result)
+
+```cypher
+MATCH
+  (c:NominalCompound)-[r1:FORMED_BY]->(m1:Member),
+  (c)-[r2:FORMED_BY]->(m2:Member)
+WHERE
+  r1.position=1
+  AND m1.lemma='aequus' // Insert here the first member
+  AND r2.position=2
+RETURN
+  c, m1, m2, r1, r2
+```
+
+The result is the same, but Neo4j generates a graph of the nodes representing the first member, the compounds in which it occurs, and the various second members it combines with, as shown in the following picture.
+
+<p align="center">
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_2_aequus.png" alt="aequus" />
+</p>
+
+### All compounds sharing the second member I
 
 ```cypher
 MATCH
@@ -180,6 +218,165 @@ ORDER BY
 ```
 
 This query identifies all compounds sharing the same second member.
+
+### All compounds sharing the second member II (graphic result)
+
+```cypher
+MATCH
+  (c:NominalCompound)-[r1:FORMED_BY]->(m1:Member),
+  (c)-[r2:FORMED_BY]->(m2:Member)
+WHERE
+  r2.position=2
+  AND m2.lemma='volo (them.)' // Insert here the second member
+  AND r1.position=1
+RETURN
+  c, m1, m2, r1, r2
+```
+
+The result is the same, but Neo4j generates a graph of the nodes representing the second member, the compounds in which it occurs, and the various first members it combines with, as shown in the following picture.
+
+<p align="center">
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_3_volo.png" alt="volo" />
+</p>
+
+## All compound beginning or ending in a certain manner
+
+Since the rules governing the formation of nominal compounds can significantly alter the structure of their members, it is often more useful to insert the 'sequence of letters' at the beginning or end of the compound, corresponding to the form that the members assume in composition.
+
+For example:
+
+*	*caro* \> *carni-* and *carnu-* respectively in *carnifex* and *carnufex*;
+*	*facio* \> *-fex* and *-ficus* respectively in *artifex* and *beneficus*.
+
+In both cases, the same member manifests as two distinct allomorphs, each of which may realize different functions or semantic values within the literary works in which they are attested.
+
+### All compounds beginning in the same way I
+
+```cypher
+MATCH
+  (c:NominalCompound)-[r1:FORMED_BY]->(m1:Member),
+  (c)-[r2:FORMED_BY]->(m2:Member)
+WHERE
+  c.lemma STARTS WITH 'carni' // Insert here the sequence of letters
+  AND r1.position=1
+  AND r2.position=2
+RETURN
+  c.lemma AS Compound,
+  m1.lemma AS First_Member,
+  m2.lemma AS Second_Member,
+  c.type AS Type,
+  c.subtype AS Subtype
+ORDER BY
+  toLower(c.lemma)
+```
+
+This query identifies all compounds beginning with a specific allomorph of the first member, corresponding to its form in composition.
+
+### All compounds beginning in the same way II (case-insensitive)
+
+```cypher
+MATCH
+  (c:NominalCompound)-[r1:FORMED_BY]->(m1:Member),
+  (c)-[r2:FORMED_BY]->(m2:Member)
+WHERE
+  c.lemma STARTS WITH toLower('CARNI') // Insert here the sequence of letters
+  AND r1.position=1
+  AND r2.position=2
+RETURN
+  c.lemma AS Compound,
+  m1.lemma AS First_Member,
+  m2.lemma AS Second_Member,
+  c.type AS Type,
+  c.subtype AS Subtype
+ORDER BY
+  toLower(c.lemma)
+```
+
+The result is the same as the preceding query, but this one is not case-sensitive, which can be useful for proper nouns that coincide with common names.
+
+### All compounds beginning in the same way III (graphic result)
+
+```cypher
+MATCH
+  (c:NominalCompound)-[r1:FORMED_BY]->(m1:Member),
+  (c)-[r2:FORMED_BY]->(m2:Member)
+WHERE
+  c.lemma STARTS WITH 'carni' // Insert here the sequence of letters
+  AND r1.position=1
+  AND r2.position=2
+RETURN
+  c, m1, m2, r1, r2
+```
+
+The result is the same, but Neo4j generates a graph of the nodes representing the first member, the compounds in which it occurs, and the various second members it combines with, as shown in the following picture.
+
+<p align="center">
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_4_carni.png" alt="carni" />
+</p>
+
+### All compounds ending in the same way I
+
+```cypher
+MATCH
+  (c:NominalCompound)-[r1:FORMED_BY]->(m1:Member),
+  (c)-[r2:FORMED_BY]->(m2:Member)
+WHERE
+  c.lemma ENDS WITH 'fex' // Insert here the sequence of letters
+  AND r1.position=1
+  AND r2.position=2
+RETURN
+  c.lemma AS Compound,
+  m1.lemma AS First_Member,
+  m2.lemma AS Second_Member,
+  c.type AS Type,
+  c.subtype AS Subtype
+ORDER BY
+  toLower(c.lemma)
+```
+
+This query identifies all compounds ending with a specific allomorph of the last member, corresponding to its form in composition.
+
+### All compounds ending in the same way II (case-insensitive)
+
+```cypher
+MATCH
+  (c:NominalCompound)-[r1:FORMED_BY]->(m1:Member),
+  (c)-[r2:FORMED_BY]->(m2:Member)
+WHERE
+  c.lemma ENDS WITH tolower('FEX') // Insert here the sequence of letters
+  AND r1.position=1
+  AND r2.position=2
+RETURN
+  c.lemma AS Compound,
+  m1.lemma AS First_Member,
+  m2.lemma AS Second_Member,
+  c.type AS Type,
+  c.subtype AS Subtype
+ORDER BY
+  toLower(c.lemma)
+```
+
+The result is the same as the preceding query, but this one is not case-sensitive.
+
+### All compounds ending in the same way III (graphic result)
+
+```cypher
+MATCH
+  (c:NominalCompound)-[r1:FORMED_BY]->(m1:Member),
+  (c)-[r2:FORMED_BY]->(m2:Member)
+WHERE
+  c.lemma ENDS WITH 'fex' // Insert here the sequence of letters
+  AND r1.position=1
+  AND r2.position=2
+RETURN
+  c, m1, m2, r1, r2
+```
+
+The result is the same, but Neo4j generates a graph of the nodes representing the second member, the compounds in which it occurs, and the various first members it combines with, as shown in the following picture.
+
+<p align="center">
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_5_fex.png" alt="fex" />
+</p>
 
 ## All nominal compounds in a specific work
 
@@ -212,7 +409,7 @@ For instance, this is the case with "Saturae", which can refer to both "A. Persi
 These results are separated by author and title.
 To avoid this issue, it is better to use the following queries.
 
-### Acronym of the work
+### Acronym of the work I
 
 ```cypher
 MATCH
@@ -253,9 +450,26 @@ ORDER BY
 
 The result is identical to the previous one, but the syntax is more verbose.
 
+### Acronym of the work II (graphic result)
+
+```cypher
+MATCH
+  (c:NominalCompound)<-[r:CONTAINS]-(w:Work)
+WHERE
+  w.acronym='CALP. ecl.' // Insert here the acronym of the work
+RETURN
+  w, c, r
+```
+
+In this case, Neo4j generates a graph depicting the work and the compound it contains, as shown in the following picture.
+
+<p align="center">
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_6_CALP_ecl.png" alt="CALP_ecl" />
+</p>
+
 ## All nominal compounds in a specific author
 
-These queries extract the list of all nominal compounds used by aspecific author in his *opera omnia*.
+These queries extract the list of all nominal compounds used by a specific author in his *opera omnia*.
 The results are sorted alphabetically, and the number of occurrences, type, and subtype are included.
 
 ### Name of the author
@@ -320,6 +534,24 @@ ORDER BY
 ```
 
 The output is identical to the previous one, though the author and title are defined in a more verbose manner.
+
+### Name of the author, distinguishing the single works III (graphic result)
+
+```cypher
+MATCH
+  (c:NominalCompound)<-[r:CONTAINS]-(w:Work),
+  (w)-[wr:WRITTEN_BY]->(a:Author)
+WHERE
+  a.name='Flavius Merobaudes ex Hispania' // Insert here the name of the author
+RETURN
+  a, w, c, r, wr
+```
+
+In this case, Neo4j generates a graph depicting the works of a specific author and the compounds they contain, as shown in the following picture.
+
+<p align="center">
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_7_Merobaudes.png" alt="Merobaudes" />
+</p>
 
 ## Types of compounds recurring in a specific work
 

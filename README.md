@@ -11,7 +11,7 @@ This is the home page of the graph database of Latin nominal compounds, develope
 The database aims to report the data contained in some Excel files ([also present in this repository](https://github.com/AI4CH-UniUD/Genus-Compositicium/tree/main/Dataset)) about nominal compounds of works of different Latin authors and to be a tool for investigating which types of compounds are used depending on the authors and the works they have composed, in a much more effective and efficient way compared to the use of the original Excel files.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/ER_Nominal_Compounds.jpg" alt="Overall ER Diagram" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/ER_Nominal_Compounds.jpg" alt="Overall ER Diagram" />
 </p>
 
 The conceptual schema upon which the database has been designed, which is depicted in the Entity-Relationship diagram above, contains the entities:
@@ -23,7 +23,7 @@ The conceptual schema upon which the database has been designed, which is depict
 The following picture reports an example of an instance of the graph database, which is useful for data navigation purposes.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/DB_Graph_Nominal_Compounds.jpg" alt="Subgraph of the Nominal Compounds graph" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/DB_Graph_Nominal_Compounds.jpg" alt="Subgraph of the Nominal Compounds graph" />
 </p>
 
 The current repository includes:
