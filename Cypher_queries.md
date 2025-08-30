@@ -63,7 +63,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the compound, the works in which it occurs, and their authors, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_1_aliger.png" alt="aliger" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_1_aliger.jpg" alt="aliger" />
 </p>
 
 ### Specific author I
@@ -194,7 +194,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the first member, the compounds in which it occurs, and the various second members it combines with, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_2_aequus.png" alt="aequus" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_2_aequus.jpg" alt="aequus" />
 </p>
 
 ### All compounds sharing the second member I
@@ -236,7 +236,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the second member, the compounds in which it occurs, and the various first members it combines with, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_3_volo.png" alt="volo" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_3_volo.jpg" alt="volo" />
 </p>
 
 ## All compound beginning or ending in a certain manner
@@ -311,7 +311,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the first member, the compounds in which it occurs, and the various second members it combines with, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_4_carni.png" alt="carni" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_4_carni.jpg" alt="carni" />
 </p>
 
 ### All compounds ending in the same way I
@@ -375,7 +375,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the second member, the compounds in which it occurs, and the various first members it combines with, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_5_fex.png" alt="fex" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_5_fex.jpg" alt="fex" />
 </p>
 
 ## All nominal compounds in a specific work
@@ -464,7 +464,7 @@ RETURN
 In this case, Neo4j generates a graph depicting the work and the compound it contains, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_6_CALP_ecl.png" alt="CALP_ecl" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_6_CALP_ecl.jpg" alt="CALP_ecl" />
 </p>
 
 ## All nominal compounds in a specific author
@@ -550,7 +550,7 @@ RETURN
 In this case, Neo4j generates a graph depicting the works of a specific author and the compounds they contain, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_7_Merobaudes.png" alt="Merobaudes" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_7_Merobaudes.jpg" alt="Merobaudes" />
 </p>
 
 ## Types of compounds recurring in a specific work
