@@ -63,7 +63,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the compound, the works in which it occurs, and their authors, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_1_aliger.jpg" alt="aliger" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_1_aliger.png" alt="aliger" />
 </p>
 
 ### Specific author I
@@ -194,7 +194,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the first member, the compounds in which it occurs, and the various second members it combines with, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_2_aequus.jpg" alt="aequus" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_2_aequus.png" alt="aequus" />
 </p>
 
 ### All compounds sharing the second member I
@@ -236,10 +236,10 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the second member, the compounds in which it occurs, and the various first members it combines with, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_3_volo.jpg" alt="volo" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_3_volo.png" alt="volo" />
 </p>
 
-## All compound beginning or ending in a certain manner
+## All compounds beginning or ending in a certain manner
 
 Since the rules governing the formation of nominal compounds can significantly alter the structure of their members, it is often more useful to insert the 'sequence of letters' at the beginning or end of the compound, corresponding to the form that the members assume in composition.
 
@@ -311,7 +311,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the first member, the compounds in which it occurs, and the various second members it combines with, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_4_carni.jpg" alt="carni" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_4_carni.png" alt="carni" />
 </p>
 
 ### All compounds ending in the same way I
@@ -375,7 +375,7 @@ RETURN
 The result is the same, but Neo4j generates a graph of the nodes representing the second member, the compounds in which it occurs, and the various first members it combines with, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_5_fex.jpg" alt="fex" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_5_fex.png" alt="fex" />
 </p>
 
 ## All nominal compounds in a specific work
@@ -464,7 +464,7 @@ RETURN
 In this case, Neo4j generates a graph depicting the work and the compound it contains, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_6_CALP_ecl.jpg" alt="CALP_ecl" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_6_CALP_ecl.png" alt="CALP_ecl" />
 </p>
 
 ## All nominal compounds in a specific author
@@ -550,7 +550,7 @@ RETURN
 In this case, Neo4j generates a graph depicting the works of a specific author and the compounds they contain, as shown in the following picture.
 
 <p align="center">
-<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_7_Merobaudes.jpg" alt="Merobaudes" />
+<img src="https://github.com/AI4CH-UniUD/Genus-Compositicium/blob/main/IMG/IMG_7_Merobaudes.png" alt="Merobaudes" />
 </p>
 
 ## Types of compounds recurring in a specific work
@@ -1206,7 +1206,7 @@ OPTIONAL MATCH
   (w2:Work)-[:CONTAINS]->(n2:NominalCompound {subtype: Subtype}),
   (w2)-[:WRITTEN_BY]->(a:Author)
 WHERE
-  a.name = 'P. Vergilius Maro' // Insert here the name of the author
+  a.name = 'P. Papinius Statius' // Insert here the name of the author
 WITH Subtype,
      Occurrences_Work,
      SUM(CASE WHEN n2 IS NOT NULL THEN 1 ELSE 0 END) AS Occurrences_Author
@@ -1276,7 +1276,7 @@ WITH Subtype,
 OPTIONAL MATCH
   (w2:Work)-[:CONTAINS]->(n2:NominalCompound {subtype: Subtype})
 WHERE
-  w2.subgenre = 'Historiography' // Insert here the subgenre
+  w2.subgenre = 'High poetry' // Insert here the subgenre
 WITH Subtype,
      Occurrences_Work,
      SUM(CASE WHEN n2 IS NOT NULL THEN 1 ELSE 0 END) AS Occurrences_Subgenre
@@ -1411,7 +1411,7 @@ OPTIONAL MATCH
   (w1:Work)-[:CONTAINS]->(n1:NominalCompound {subtype: Subtype}),
   (w1)-[:WRITTEN_BY]->(a1:Author)
 WHERE
-  a1.name = 'P. Vergilius Maro' // Insert here the name of author 1
+  a1.name = 'P. Papinius Statius' // Insert here the name of author 1
 WITH
   Subtype,
   SUM(CASE WHEN n1 IS NOT NULL THEN 1 ELSE 0 END) AS Occurrences_Author1
@@ -1421,7 +1421,7 @@ OPTIONAL MATCH
   (w2:Work)-[:CONTAINS]->(n2:NominalCompound {subtype: Subtype}),
   (w2)-[:WRITTEN_BY]->(a2:Author)
 WHERE
-  a2.name = 'P. Papinius Statius' // Insert here the name of author 2
+  a2.name = 'P. Vergilius Maro' // Insert here the name of author 2
 WITH
   Subtype,
   Occurrences_Author1,
@@ -1485,7 +1485,7 @@ OPTIONAL MATCH
   (w1:Work)-[:CONTAINS]->(n1:NominalCompound {subtype: Subtype}),
   (w1)-[:WRITTEN_BY]->(a1:Author)
 WHERE
-  a1.name = 'P. Vergilius Maro' // Insert here the name of the author
+  a1.name = 'P. Papinius Statius' // Insert here the name of the author
 WITH
   Subtype,
   SUM(CASE WHEN n1 IS NOT NULL THEN 1 ELSE 0 END) AS Occurrences_Author
@@ -1494,7 +1494,7 @@ WITH
 OPTIONAL MATCH 
   (w2:Work)-[:CONTAINS]->(n2:NominalCompound {subtype: Subtype})
 WHERE
-  w2.subgenre = 'Historiography' // Insert here the subgenre
+  w2.subgenre = 'High poetry' // Insert here the subgenre
 WITH
   Subtype,
   Occurrences_Author,
@@ -1558,7 +1558,7 @@ OPTIONAL MATCH
   (w1:Work)-[:CONTAINS]->(n1:NominalCompound {subtype: Subtype}),
   (w1)-[:WRITTEN_BY]->(a1:Author)
 WHERE
-  a1.name = 'P. Vergilius Maro' // Insert here the name of the author
+  a1.name = 'P. Papinius Statius' // Insert here the name of the author
 WITH
   Subtype,
   SUM(CASE WHEN n1 IS NOT NULL THEN 1 ELSE 0 END) AS Occurrences_Author
